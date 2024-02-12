@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'helloscreen.dart';
 void main(){
-  runApp(MyApp());
+  runApp( MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(useMaterial3: false),
           home: child,
         );
-    },child: HelloScreen(),
+    },child:  HelloScreen(),
     );
   }
 }
