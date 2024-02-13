@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'helloscreen.dart';
+import 'screens/firstpage.dart';
 void main(){
   runApp( MyApp());
 }
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(useMaterial3: false),
           home: child,
         );
-    },child:  HelloScreen(),
+    },child:  TechScreen(),
     );
   }
 }
