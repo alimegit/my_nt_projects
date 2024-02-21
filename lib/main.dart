@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(useMaterial3: false),
           home: child,
         );
-    },child:  FetchCarDataScreen(),
+    },child:  const FetchCarDataScreen(),
     );
   }
 }

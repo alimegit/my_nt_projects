@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_nt_ten/screens/car_info_screen.dart';
 import 'package:flutter_nt_ten/utils/colors/app_colors.dart';
 import 'package:flutter_nt_ten/utils/styles/app_text_style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 
 import '../../models/car_model.dart';
@@ -17,32 +19,29 @@ class FetchCarDataScreen extends StatefulWidget {
 }
 
 class _FetchDataCarModelsState extends State<FetchCarDataScreen> {
-  CarModel? carModel;
   bool isLoading = true;
-  List<CarModel> cars = [];
 
-  Future<CarModel?> _fetchData(int id) async {
+  Future<List<CarModel>?> _fetchData() async {
     http.Response response;
     try {
       response = await http.get(
-        Uri.parse("https://easyenglishuzb.free.mockoapp.net/companies$id"),
+        Uri.parse("https://easyenglishuzb.free.mockoapp.net/companies"),
       );
       if (response.statusCode == 200) {
-        return CarModel.fromJson(jsonDecode(response.body));
+        return (jsonDecode(response.body)["data"] as List?)
+            ?.map((e) => CarModel.fromJson(e))
+            .toList() ??
+            [];
       }
     } catch (error) {
-      throw Exception();
+      throw Exception(
+        error.toString(),
+      );
     }
+    return null;
   }
 
   @override
-  void initState() {
-    _fetchData(4);
-    super.initState();
-  }
-
-  @override
-  // https://easyenglishuzb.free.mockoapp.net/companies
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -54,29 +53,67 @@ class _FetchDataCarModelsState extends State<FetchCarDataScreen> {
           style: AppTextStyle.interBold.copyWith(color: AppColors.black),
         ),
       ),
-      body: Column(
-        children: [
-          FutureBuilder<CarModel?>(
-            future: _fetchData(4),
-            builder: (
-            BuildContext context,
-            AsyncSnapshot<CarModel?> snapshot,)
-            {
-            if(snapshot.data!=null){
-            CarModel carModel = snapshot.data as CarModel;
-            return ListTile(
-              title: Text(carModel.car_model),
+      body: FutureBuilder<List<CarModel>?>(
+        future: _fetchData(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<CarModel>?> snapShot) {
+          if (snapShot.data != null) {
+            List<CarModel> users = snapShot.data as List<CarModel>;
+            return ListView(
+              children: List.generate(
+                users.length,
+                    (index) {
+                  CarModel carModel = users[index];
+                  return Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder:(context)=>CarsInfoScreen(id: carModel.id)));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10.h),
+                        decoration: BoxDecoration(
+                            color: AppColors.c_C4C4C4,
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(child: Image.network(carModel.logo,width: 150,height: 150,)),
+                            Padding(
+                              padding:  EdgeInsets.only(left: 20.w),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("CarModel:${carModel.car_model}"),
+                                  Text("ID:${carModel.id}"),
+                                  Text("AveragePrice${carModel.average_price}"),
+                                  Text("established_year:${carModel.established_year}"),
+                                ],
+                              ),
 
+                            ),
+                            
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             );
-            }
-            else{
-              return Center(child: const CircularProgressIndicator());
-            }
-
-            }
-
-            ),
-        ],
+          } else if (snapShot.hasError) {
+            return Center(
+              child: Text(
+                snapShot.hasError.toString(),
+              ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }
