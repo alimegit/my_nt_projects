@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nt_ten/screens/category_screen/categories.dart';
+import 'package:flutter_nt_ten/screens/category_screen/fetchcardata_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'helloscreen.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(useMaterial3: false),
           home: child,
         );
-    },child:  FetchDataCarModelsScreen(),
+    },child:  FetchCarDataScreen(),
     );
   }
 }
