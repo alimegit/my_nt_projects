@@ -1,0 +1,73 @@
+{
+  "data":[
+    {
+      "id":1,
+      "car_model":"Honda",
+      "average_price":200000,
+      "logo":"https://www.carlogos.org/car-logos/honda-logo-1700x1150.png",
+      "established_year":1949
+
+    },
+    {
+
+      "id":2,
+      "car_model":"Toyota",
+      "average_price":300000,
+      "logo":"https://www.pngall.com/wp-content/uploads/2016/04/Toyota-Logo-Free-Download-PNG.png",
+      "established_year":1918
+
+
+    },
+
+    {
+      "id":3,
+      "car_model":"Rolls Royce",
+      "average_price":250000,
+      "logo":"https://www.cjchsolicitors.co.uk/wp-content/uploads/2017/01/Logo-Rolls-Royce.png",
+      "established_year":1906
+
+    },
+
+    {
+      "id":4,
+      "car_model":"Tesla",
+      "average_price":120000,
+      "logo":"https://pngimg.com/uploads/tesla_logo/tesla_logo_PNG21.png",
+      "established_year":2003
+
+    },
+    {
+      "id":5,
+      "car_model":"Honda",
+      "average_price":200000,
+      "logo":"https://www.carlogos.org/car-logos/honda-logo-1700x1150.png",
+      "established_year":1949
+    },
+    {
+
+      "id":6,
+      "car_model":"Toyota",
+      "average_price":300000,
+      "logo":"https://www.pngall.com/wp-content/uploads/2016/04/Toyota-Logo-Free-Download-PNG.png",
+      "established_year":1918
+
+    },
+
+    {
+      "id":7,
+      "car_model":"Rolls Royce",
+      "average_price":250000,
+      "logo":"https://www.cjchsolicitors.co.uk/wp-content/uploads/2017/01/Logo-Rolls-Royce.png",
+      "established_year":1908
+    },
+
+    {
+      "id":8,
+      "car_model":"Tesla",
+      "average_price":120000,
+      "logo":"https://pngimg.com/uploads/tesla_logo/tesla_logo_PNG21.png",
+      "established_year":2003
+
+    }
+  ]
+}
